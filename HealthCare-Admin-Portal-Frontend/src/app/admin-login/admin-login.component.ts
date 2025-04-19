@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../Auth-Service/auth.service';
+import { catchError } from 'rxjs';
+import { SharedService } from '../shared-service/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-login',
@@ -10,7 +14,11 @@ export class AdminLoginComponent {
   authForm!: FormGroup;
   isLoginMode = true;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,
+    private auth:AuthService,
+    private shared:SharedService,
+    private route:Router
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -20,7 +28,7 @@ export class AdminLoginComponent {
     this.authForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      name: [''] // used only in signup mode
+      name: ['']
     });
   }
 
@@ -40,11 +48,24 @@ export class AdminLoginComponent {
     const { email, password, name } = this.authForm.value;
 
     if (this.isLoginMode) {
+      this.auth.login(email,password).subscribe({
+        next:(result)=>{
+        },
+        error:(err)=>{console.error(err);}
+      })
       console.log('Logging in with', { email, password });
-      // Add login logic here
+      
     } else {
+      this.auth.signup(name,email,password).subscribe({
+        next:(res)=>{
+        this.route.navigate(['/']); 
+        this.switchMode();
+        },
+        error:(err)=>{
+        console.error(err);
+        }
+      })
       console.log('Signing up with', { name, email, password });
-      // Add signup logic here
     }
   }
 }
