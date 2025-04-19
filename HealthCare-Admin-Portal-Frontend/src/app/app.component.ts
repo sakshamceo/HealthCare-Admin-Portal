@@ -1,17 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedService } from './shared-service/shared.service';
+import { catchError } from 'rxjs';
+import { AuthService } from './Auth-Service/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'HealthPortal--hackathon';
-  isLoggedIn: Boolean = false;
-  constructor(private router: Router) {
-
+  isLoggedIn: boolean = false;
+  constructor(private router: Router,
+    private shared:SharedService,
+    private auth: AuthService
+  ) {}
+  ngOnInit(): void {
+    const isLogged = localStorage.getItem('isLoggedIn');
+    this.isLoggedIn = isLogged === 'true';
+    this.auth.isLoggedIn = this.isLoggedIn;
   }
+
   goToAdminLogin() {
     this.router.navigate(['/admin-login'])
   }
