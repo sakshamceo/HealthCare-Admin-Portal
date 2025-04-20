@@ -5,6 +5,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SharedService {
-
+  isLoggedInSubject =  new BehaviorSubject<boolean>(false);
+  isLoggedIn$ = this.isLoggedInSubject.asObservable();
   constructor() { }
+  isLoggedIn(value:boolean)
+  {
+    this.isLoggedInSubject.next(value);
+  }
 }

@@ -9,13 +9,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './Auth-Service/auth.service';
 import { SharedService } from './shared-service/shared.service';
 import { HttpClientModule } from '@angular/common/http';
+import { SearchBoxComponent } from './search-box/search-box.component';
+import { AddReportComponent } from './add-report/add-report.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    SearchBoxComponent,
+    AddReportComponent
   ],
   imports: [
     BrowserModule,

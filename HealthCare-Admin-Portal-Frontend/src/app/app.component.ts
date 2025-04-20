@@ -11,17 +11,20 @@ import { AuthService } from './Auth-Service/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'HealthPortal--hackathon';
-  isLoggedIn: boolean = false;
+  isLoggedIn: boolean = true;
   constructor(private router: Router,
     private shared:SharedService,
     private auth: AuthService
   ) {}
   ngOnInit(): void {
-    const isLogged = localStorage.getItem('isLoggedIn');
-    this.isLoggedIn = isLogged === 'true';
-    this.auth.isLoggedIn = this.isLoggedIn;
+    // const isLogged = localStorage.getItem('isLoggedIn');
+    // this.isLoggedIn = isLogged === 'true';
+    // this.auth.isLoggedIn = this.isLoggedIn;
+    this.shared.isLoggedIn(this.isLoggedIn);
   }
-
+  addNewReport(){
+   this.router.navigate(['/add-report'])
+  }
   goToAdminLogin() {
     this.router.navigate(['/admin-login'])
   }
