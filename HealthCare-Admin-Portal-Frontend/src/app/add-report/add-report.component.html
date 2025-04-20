@@ -1,0 +1,29 @@
+<form [formGroup]="testForm" (ngSubmit)="onSubmit()">
+
+    <h3>Select Tests:</h3>
+    <div *ngFor="let test of availableTests">
+      <label>
+        <input type="checkbox" (change)="onCheckboxChange(test, $event)">
+        {{ test }}
+      </label>
+    </div>
+  
+    <br>
+  
+    <label>
+      Upload Test Report (PDF):
+      <input type="file" (change)="onPdfSelected($event)" accept="application/pdf" />
+    </label>
+  
+    <br><br>
+  
+    <label>
+      Upload Profile Photo:
+      <input type="file" (change)="onPhotoSelected($event)" accept="image/*" />
+    </label>
+  
+    <br><br>
+  
+    <button type="submit">Submit</button>
+  </form>
+  

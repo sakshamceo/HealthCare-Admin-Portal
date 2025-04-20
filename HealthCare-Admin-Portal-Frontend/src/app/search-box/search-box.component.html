@@ -1,0 +1,29 @@
+<div class="min-h-screen flex flex-col items-center justify-start px-4 text-center pt-10">
+    <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4">
+      Search Patient Diagnosis🩻
+    </h1>
+    <p class="text-lg md:text-xl text-gray-300 mb-6 max-w-2xl">
+      Get access to a wide range of patient data using our advanced LLM-powered model. Fast. Secure. Intelligent.
+    </p>
+    <form 
+    [formGroup]="searchBox" 
+    (ngSubmit)="search()" 
+    class="w-full max-w-xl mx-auto mt-8 flex items-center gap-4 px-4"
+  >
+    <input 
+      type="text" 
+      placeholder="What patient are you looking for?" 
+      formControlName="searchQuery"
+      class="flex-1 px-5 py-3 rounded-xl bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white text-gray-800 text-base shadow-md transition-all duration-200"
+    />
+    <button 
+      type="submit" 
+      [disabled]="searchBox.invalid"
+      class="px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold shadow-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+    >
+      Search
+    </button>
+  </form>
+  
+  </div>
+  
