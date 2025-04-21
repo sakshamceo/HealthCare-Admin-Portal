@@ -11,7 +11,7 @@ import { AuthService } from './Auth-Service/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'HealthPortal--hackathon';
-  isLoggedIn: boolean = true;
+  isLoggedIn: boolean = false;
   constructor(private router: Router,
     private shared:SharedService,
     private auth: AuthService

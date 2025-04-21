@@ -1,29 +1,99 @@
-<form [formGroup]="testForm" (ngSubmit)="onSubmit()">
-
-    <h3>Select Tests:</h3>
-    <div *ngFor="let test of availableTests">
-      <label>
-        <input type="checkbox" (change)="onCheckboxChange(test, $event)">
-        {{ test }}
-      </label>
+<form [formGroup]="PatientForm" (ngSubmit)="submit()" class="text-white p-6 rounded-lg max-w-4xl mx-auto shadow-lg grid grid-cols-1 md:grid-cols-2 gap-6">
+  
+    <div class="mb-4">
+      <label for="name" class="block text-gray-300 mb-2">Name</label>
+      <input formControlName="name" placeholder="Name" type="text" id="name" class="form-input p-3 w-full bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
     </div>
   
-    <br>
+    <div class="mb-4">
+      <label for="phone" class="block text-gray-300 mb-2">Phone</label>
+      <input formControlName="phone" placeholder="Phone" type="number" id="phone" class="form-input p-3 w-full bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
   
-    <label>
-      Upload Test Report (PDF):
-      <input type="file" (change)="onPdfSelected($event)" accept="application/pdf" />
-    </label>
+    <div class="mb-4">
+      <label for="city" class="block text-gray-300 mb-2">City</label>
+      <input formControlName="city" placeholder="City" type="text" id="city" class="form-input p-3 w-full bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
   
-    <br><br>
+    <div class="mb-4">
+      <label for="age" class="block text-gray-300 mb-2">Age</label>
+      <input formControlName="age" placeholder="Age" type="number" id="age" class="form-input p-3 w-full bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
   
-    <label>
-      Upload Profile Photo:
-      <input type="file" (change)="onPhotoSelected($event)" accept="image/*" />
-    </label>
+    <div class="mb-4">
+      <label class="block text-gray-300 mb-2">Sex</label>
+      <div class="flex items-center">
+        <label class="mr-6 text-gray-300">
+          <input type="radio" formControlName="sex" value="male" class="mr-2">
+          Male
+        </label>
+        <label class="text-gray-300">
+          <input type="radio" formControlName="sex" value="female" class="mr-2">
+          Female
+        </label>
+      </div>
+    </div>
   
-    <br><br>
+    <div class="mb-4">
+      <label for="height" class="block text-gray-300 mb-2">Height (cm)</label>
+      <input formControlName="height" placeholder="Height" type="number" id="height" class="form-input p-3 w-full bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
   
-    <button type="submit">Submit</button>
+    <div class="mb-4">
+      <label for="weight" class="block text-gray-300 mb-2">Weight (kg)</label>
+      <input formControlName="weight" placeholder="Weight" type="number" id="weight" class="form-input p-3 w-full bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+  
+    <div class="mb-4">
+      <label for="blood" class="block text-gray-300 mb-2">Blood Group</label>
+      <input formControlName="blood" placeholder="Blood Group" type="text" id="blood" class="form-input p-3 w-full bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+    <div class="mb-4 col-span-2" formGroupName="test">
+        <label for="test" class="block text-gray-300 mb-2 text-lg font-semibold">Select Test</label>
+        <div class="flex space-x-6">
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" formControlName="LFT" value="LFT" class="form-checkbox text-blue-600">
+            <span class="text-gray-300">LFT</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" formControlName="KFT" value="KFT" class="form-checkbox text-blue-600">
+            <span class="text-gray-300">KFT</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" formControlName="Sugar" value="Sugar" class="form-checkbox text-blue-600">
+            <span class="text-gray-300">Sugar</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" formControlName="CBC" value="CBC" class="form-checkbox text-blue-600">
+            <span class="text-gray-300">CBC</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" formControlName="Lipid" value="Lipid" class="form-checkbox text-blue-600">
+            <span class="text-gray-300">Lipid</span>
+          </label>
+        </div>
+      </div>
+      <div class="mb-4 col-span-2">
+        <label class="block text-gray-300 mb-2 text-lg font-semibold">
+          Upload Your Report
+        </label>
+        <input 
+          type="file" 
+          placeholder="Upload Your Report"
+          formControlName="file"
+          accept=".pdf"
+          class="w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-500"
+        />
+        <p class="text-sm text-gray-400 mt-2" *ngIf="selectedTests?.length">
+          Based on your selected tests: <strong>{{ selectedTests.join(', ') }}</strong>
+        </p>
+      </div>
+      
+    <div class="col-span-2">
+      <button type="submit" [disabled]="PatientForm.invalid" class="w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-500">
+        Submit
+      </button>
+    </div>
+    
   </form>
   

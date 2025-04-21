@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './Auth-Service/auth.service';
 import { SharedService } from './shared-service/shared.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,6 +26,7 @@ import { AddReportComponent } from './add-report/add-report.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule
   ],
   providers: [AuthService,SharedService],
   bootstrap: [AppComponent]
